@@ -6,11 +6,12 @@ import Post from './Post'
 import { Route, BrowserRouter } from 'react-router-dom'
 import Blog from './Blog'
 import BlogContext from './BlogContext'
+import useLocalStorage from './hooks'
 
 function App() {
-  const [blogsLoaded, setBlogsLoaded] = useState(false)
-  const [blogs, setBlogs] = useLocalStorage(null);
-
+  // const [blogsLoaded, setBlogsLoaded] = useState(false)
+  const [blogs, setBlogs] = useLocalStorage("blogs");
+  console.log(blogs)
   // useEffect(() => {
   //   function loadBlogs() {
   //     try {
@@ -24,11 +25,11 @@ function App() {
       <BlogContext.Provider value={{ blogs, setBlogs }}>
         <div className="App">
           <Header />
+          <Route exact path="/posts/:postid">
+            <Post />
+          </Route>
           <Route exact path="/new">
             <NewPost />
-          </Route>
-          <Route exact path="/:postid">
-            <Post />
           </Route>
           <Route exact path="/">
             <Blog />

@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
+import BlogContext from './BlogContext'
 
 function NewPost() {
     const INITIAL_STATE = { title: "", description: "", body: "" }
     const history = useHistory();
     const [formData, setFormData] = useState(INITIAL_STATE);
+    const { blogs, setBlogs } = useContext(BlogContext)
 
     const handleChange = (evt) => {
         const { name, value } = evt.target;
@@ -16,8 +18,9 @@ function NewPost() {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        console.log('clicked')
         //need to save in here
+        {!blogs ? setBlogs([{ ...formData, id: 1 }]) : setBlogs([...blogs, { ...formData, id: (blogs.length + 1) }])}
+        // setBlogs([...blogs, {...formData, id: (blogs.length + 1)}])
         setFormData(INITIAL_STATE);
         history.push("/");
     }
