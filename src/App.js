@@ -11,7 +11,6 @@ import useLocalStorage from './hooks'
 function App() {
   // const [blogsLoaded, setBlogsLoaded] = useState(false)
   const [blogs, setBlogs] = useLocalStorage("blogs");
-  console.log(blogs)
   // useEffect(() => {
   //   function loadBlogs() {
   //     try {
@@ -23,9 +22,9 @@ function App() {
   return (
     <BrowserRouter>
       <BlogContext.Provider value={{ blogs, setBlogs }}>
-        <div className="App">
+        <div className="App container-fluid text-left ml-3">
           <Header />
-          <Route exact path="/posts/:postid">
+          <Route exact path="/posts/:id">
             <Post />
           </Route>
           <Route exact path="/new">
