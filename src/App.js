@@ -12,7 +12,7 @@ function App() {
       <Route exact path="/new">
         <NewPost />
       </Route>
-      <Route path="/:id">
+      <Route exact path="/:postid">
         <Post />
       </Route>
       <Route exact path="/">

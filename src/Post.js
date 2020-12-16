@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 function Post() {
-    const { id } = useParams();
-    const [post, setPost] = useState()
+    const { postid } = useParams();
+    console.log(postid)
+    const [post, setPost] = useState(null)
 
-    if(!id) { return <h1>404 oops this blog post wasn't found!</h1>}
+    if(!post) { return <h1>404 oops this blog post wasn't found!</h1>}
 
     return (
         <div>
