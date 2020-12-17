@@ -1,4 +1,4 @@
-import { ADD, EDIT, REMOVE, ADDCOMMENT, DELETECOMMENT } from './actionTypes'
+import { ADD, EDIT, REMOVE, ADDCOMMENT, DELETECOMMENT, LOCALLOAD } from './actionTypes'
 
 export function addPost(post) {
     return {
@@ -33,4 +33,11 @@ export function deleteComment(postid, commentid){
         type: DELETECOMMENT,
         payload: { postid: postid, commentid: commentid }
     };
+}
+
+export function loadLocalStorage(posts) {
+    return {
+        type: LOCALLOAD,
+        payload: posts
+    }
 }

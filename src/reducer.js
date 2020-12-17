@@ -1,4 +1,4 @@
-import { ADD, EDIT, REMOVE, ADDCOMMENT, DELETECOMMENT} from './actionTypes'
+import { ADD, EDIT, REMOVE, ADDCOMMENT, DELETECOMMENT, LOCALLOAD} from './actionTypes'
 
 const INITIAL_STATE = { posts: {} }
 
@@ -24,6 +24,9 @@ function reducer(state = INITIAL_STATE, action) {
 
         case DELETECOMMENT:
             return { posts: {...state.posts, [action.payload.postid]: {...state.posts[action.payload.postid], comments: state.posts[action.payload.postid].comments.filter(c => c.id !== action.payload.commentid)}}}
+
+        case LOCALLOAD:
+            return { ...state, posts: action.payload}
 
         default: 
             return state;
