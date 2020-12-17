@@ -14,7 +14,7 @@ function Post() {
     useEffect(() => {
         function loadBlog(){
             if(blogs){
-                let targetPost = blogs.filter(b => b.id === parseInt(id))
+                let targetPost = blogs.filter(b => b.id === `${id}`)
                 setPost(targetPost[0])
             }
         }
@@ -31,14 +31,14 @@ function Post() {
         evt.preventDefault();
         if(blogs){
             console.log(blogs)
-            setBlogs(blogs.filter(b => b.id !== parseInt(evt.target.parentNode.id)))
+            setBlogs(blogs.filter(b => b.id !== `${evt.target.parentNode.id}`))
         }
         history.push("/")
     }
 
     const deleteComment = (evt) => {
         evt.preventDefault();
-        setBlogs(post.comments.length > 0 ? blogs.map(blog => (blog.id !== parseInt(evt.target.parentNode.id) ? blog : { ...blog, comments: blog.comments.filter(c => c.id !== `${evt.target.id}`)})) : blogs)
+        setBlogs(post.comments.length > 0 ? blogs.map(blog => (blog.id !== `${evt.target.parentNode.id}` ? blog : { ...blog, comments: blog.comments.filter(c => c.id !== `${evt.target.id}`)})) : blogs)
         //kind of hacky way to remove the button but it works
         evt.target.parentNode.remove();
     }
