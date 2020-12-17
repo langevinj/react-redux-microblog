@@ -1,17 +1,9 @@
-import React, {useEffect} from 'react' 
+import React from 'react' 
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { useLocalStorage } from './hooks'
 
 function TitleList(){
     const posts = useSelector(st => st.posts);
-    // const [storedPosts, setStoredPosts] = useLocalStorage("posts")
-
-    // useEffect(() => {
-    //     function updateLocalPosts(){
-    //         setStoredPosts(storedPosts => posts)
-    //     }
-    // }, [posts])
 
     return (
         <ul>
