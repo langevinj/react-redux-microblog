@@ -18,7 +18,7 @@ function App() {
   //     }
   //   }
   // })
-
+  console.log(blogs)
   return (
     <BrowserRouter>
       <BlogContext.Provider value={{ blogs, setBlogs }}>

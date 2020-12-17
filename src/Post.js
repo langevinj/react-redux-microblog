@@ -28,8 +28,8 @@ function Post() {
             {!editView ? (<>
                 <div className="post-header">
                     <h2 className="title">{post.title}</h2>
-                    <button className="btn" onClick={toggleEditView}><i class="fas fa-edit text-primary mr-3"></i></button>
-                    <button className="btn"><i class="fas fa-times text-danger"></i></button>
+                    <button className="btn" onClick={toggleEditView}><i className="fas fa-edit text-primary mr-3"></i></button>
+                    <button className="btn"><i className="fas fa-times text-danger"></i></button>
                 </div>
                 <p className="font-italic">{post.description}</p>
                 <p>{post.body}</p>
