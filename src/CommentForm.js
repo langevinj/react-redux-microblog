@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react'
 import BlogContext from './BlogContext'
+import {v4 as uuid} from 'uuid'
 
 function CommentForm({ post=null }){
     const [newComment, setNewComment] = useState("");
@@ -11,8 +12,9 @@ function CommentForm({ post=null }){
     }
 
     const handleSubmit = (evt) => {
-        !post.comments ? setBlogs(blogs => blogs.map(blog => blog.id === post.id ? {...blog, comments: [newComment]}: blog)) : 
-            setBlogs(blogs => blogs.map(blog => blog.id === post.id ? { ...blog, comments: [...blog.comments, newComment] } : blog))
+        !post.comments ? setBlogs(blogs => blogs.map(blog => blog.id === post.id ? {...blog, comments: [{text: newComment, id: uuid()}
+        ]}: blog)) : 
+            setBlogs(blogs => blogs.map(blog => blog.id === post.id ? { ...blog, comments: [...blog.comments, { text: newComment, id: uuid() }] } : blog))
     }
 
     return (

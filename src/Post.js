@@ -30,9 +30,17 @@ function Post() {
     const deleteBlog = (evt) => {
         evt.preventDefault();
         if(blogs){
+            console.log(blogs)
             setBlogs(blogs.filter(b => b.id !== parseInt(evt.target.parentNode.id)))
         }
         history.push("/")
+    }
+
+    const deleteComment = (evt) => {
+        evt.preventDefault();
+        setBlogs(post.comments.length > 0 ? blogs.map(blog => (blog.id !== parseInt(evt.target.parentNode.id) ? blog : { ...blog, comments: blog.comments.filter(c => c.id !== `${evt.target.id}`)})) : blogs)
+        //kind of hacky way to remove the button but it works
+        evt.target.parentNode.remove();
     }
 
     return (
@@ -40,13 +48,13 @@ function Post() {
             {!editView ? (<>
                 <div className="post-header" id={post.id}>
                     <h2 className="title">{post.title}</h2>
-                    <button className="btn" onClick={toggleEditView}><i className="fas fa-edit text-primary mr-3"></i></button>
-                    <button className="btn" onClick={deleteBlog}><i className="fas fa-times text-danger"></i></button>
+                    <button className="btn fas fa-edit text-primary mr-3" onClick={toggleEditView}></button>
+                    <button className="btn fas fa-times text-danger" onClick={deleteBlog}></button>
                 </div>
                 <p className="font-italic">{post.description}</p>
                 <p>{post.body}</p>
                 <h3 className="border-top">Comments:</h3>
-                {post.comments ? post.comments.map((comment, idx) => <div key={idx}><button className="btn"><i className="fas fa-times text-danger"></i></button><p>{comment}</p></div>) : <p className="text-secondary font-italic">No comments on this post yet</p>}
+                {post.comments ? post.comments.map(comment => <div key={comment.id} id={post.id}><button className="btn fas fa-times text-danger" onClick={deleteComment} id={comment.id}></button><p>{comment.text}</p></div>) : <p className="text-secondary font-italic">No comments on this post yet</p>}
                 {post.id ? <CommentForm post={post} /> : null}
             </>) : <NewPost post={post}/>}
         </div>
