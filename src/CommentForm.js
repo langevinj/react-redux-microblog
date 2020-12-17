@@ -4,7 +4,6 @@ function CommentForm({ addComment = () => {} }){
     const [newComment, setNewComment] = useState("");
 
     const handleChange = (evt) => {
-        //check this over
         setNewComment(evt.target.value)
     }
 

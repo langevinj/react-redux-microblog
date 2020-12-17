@@ -5,7 +5,6 @@ import NewPost from './NewPost'
 import Post from './Post'
 import { Route, BrowserRouter } from 'react-router-dom'
 import Home from './Home'
-import BlogContext from './BlogContext'
 import useLocalStorage from './hooks'
 
 function App() {
@@ -15,7 +14,6 @@ function App() {
   //
   return (
     <BrowserRouter>
-      <BlogContext.Provider value={{ blogs, setBlogs }}>
         <div className="App container-fluid text-left ml-3">
           <Header />
           <Route exact path="/posts/:id">
@@ -28,7 +26,6 @@ function App() {
             <Home />
           </Route>
         </div>
-      </BlogContext.Provider>
     </BrowserRouter>
   );
 }
