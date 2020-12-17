@@ -1,21 +1,9 @@
-import React, {useEffect} from 'react' 
+import React from 'react' 
 import { Link } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { fetchPostsFromApi } from './actionCreators';
+import { useSelector } from 'react-redux'
 
 function TitleList(){
     const posts = useSelector(st => st.posts);
-    const error = useSelector(st => st.error);
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(fetchPostsFromApi());
-    }, [dispatch])
-
-    if(error) {
-        return <h3>Something is wrong...</h3>
-    }
-
 
     return (
         <ul>

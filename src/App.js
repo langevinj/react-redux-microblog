@@ -8,19 +8,25 @@ import { useDispatch, useSelector } from 'react-redux'
 import Home from './Home'
 import { useLocalStorage } from './hooks'
 import { loadLocalStorage } from './actions';
+import { fetchPostsFromApi } from './actionCreators';
 
 function App() {
   // const [blogsLoaded, setBlogsLoaded] = useState(false)
   const posts = useSelector(st => st.posts)
+  const error = useSelector(st => st.error);
   const [storedPosts, setStoredPosts] = useLocalStorage("posts");
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchPostsFromApi());
+  }, [dispatch])
   
   //sort out the blog to be deleted and remove from blogs
   //
   //on render grab the posts from local storage
-  useEffect(() => {
-    dispatch(loadLocalStorage(storedPosts))
-  }, [])
+  // useEffect(() => {
+  //   dispatch(loadLocalStorage(storedPosts))
+  // }, [])
 
   useEffect(() => {
     function updateLocalPosts() {
@@ -29,6 +35,9 @@ function App() {
     updateLocalPosts()
   }, [posts])
 
+  if (error) {
+    return <h3>Something is wrong...</h3>
+  }
 
   return (
     <BrowserRouter>
