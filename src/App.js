@@ -13,7 +13,6 @@ function App() {
   const [blogs, setBlogs] = useLocalStorage("blogs");
   //sort out the blog to be deleted and remove from blogs
 
-  console.log(blogs)
   return (
     <BrowserRouter>
       <BlogContext.Provider value={{ blogs, setBlogs }}>

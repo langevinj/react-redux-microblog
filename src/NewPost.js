@@ -20,10 +20,8 @@ function NewPost({ post = {} }) {
         evt.preventDefault();
         //if editting a pre-existing blog need to make sure that it is saved over it's previous self
         if(!post.id){
-            console.log("HIT")
             {!blogs ? setBlogs([{ ...formData, id: 1 }]) : setBlogs([...blogs, { ...formData, id: (blogs.length + 1) }])}
         } else {
-            console.log(blogs)
             setBlogs(blogs.map(blog => blog.id === post.id ? {...formData, id: blog.id} : blog))
         }
         // setBlogs([...blogs, {...formData, id: (blogs.length + 1)}])

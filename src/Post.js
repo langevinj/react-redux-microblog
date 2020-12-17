@@ -28,7 +28,6 @@ function Post() {
 
     const deleteBlog = (evt) => {
         evt.preventDefault();
-        console.log(evt.target.parentNode.id)
         if(blogs){
             setBlogs(blogs.filter(b => b.id !== parseInt(evt.target.parentNode.id)))
         }
