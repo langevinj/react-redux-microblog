@@ -46,13 +46,7 @@ function Post() {
     return (
         <div>
             {!editView ? (<>
-                <div className="post-header" id={post.id}>
-                    <h2 className="title">{post.title}</h2>
-                    <button className="btn fas fa-edit text-primary mr-3" onClick={toggleEditView}></button>
-                    <button className="btn fas fa-times text-danger" onClick={deleteBlog}></button>
-                </div>
-                <p className="font-italic">{post.description}</p>
-                <p>{post.body}</p>
+                <PostDisplay post={currentPost}/>
                 <h3 className="border-top">Comments:</h3>
                 {post.comments ? post.comments.map(comment => <div key={comment.id} id={post.id}><button className="btn fas fa-times text-danger" onClick={deleteComment} id={comment.id}></button><p>{comment.text}</p></div>) : <p className="text-secondary font-italic">No comments on this post yet</p>}
                 {post.id ? <CommentForm post={post} /> : null}
