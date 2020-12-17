@@ -28,6 +28,12 @@ function reducer(state = INITIAL_STATE, action) {
         case LOCALLOAD:
             return { ...state, posts: action.payload}
 
+        case 'FETCH_POSTS':
+            return { ...state, posts: action.posts}
+        
+        case 'ERROR':
+            return { ...state, error: true }
+
         default: 
             return state;
     }
