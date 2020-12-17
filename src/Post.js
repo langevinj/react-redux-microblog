@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import { removePost, editPost, addComment, deleteComment} from './actions'
+import {v4 as uuid} from 'uuid'
 import CommentForm from './CommentForm'
 import CommentList from './CommentList'
 import PostDisplay from './PostDisplay'
@@ -37,9 +38,14 @@ function Post() {
     } 
 
     //delete a particular comment
-    const deleteComment = (evt) => {
+    const deleteTargetComment = (evt) => {
         evt.preventDefault();
         dispatch(deleteComment(currentPost.id, evt.target.id))
+    }
+
+    //add a comment to a post
+    const addNewComment = (comment) => {
+        dispatch(addComment(currentPost.id, {text: comment, id: uuid() }))
     }
 
     // const [post, setPost] = useState(null)
@@ -80,7 +86,7 @@ function Post() {
             {!editView ? (<>
                 <PostDisplay post={currentPost} toggleEditView={toggleEditView} deleteBlog={deleteBlog}/>
                 <h3 className="border-top">Comments:</h3>
-                <CommentList comments={currentPost.comments} deleteComment={deleteComment} /></>) : <PostForm post={currentPost} editBlog={editBlog}/>}
+                <CommentList comments={currentPost.comments} deleteComment={deleteTargetComment} /><CommentForm addComment={addNewComment} /></>) : <PostForm post={currentPost} editBlog={editBlog}/>}
         </div>
     )
 }
