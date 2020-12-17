@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import BlogContext from './BlogContext'
+import { v4 as uuid} from 'uuid'
 
 function NewPost({ post = {} }) {
-    const INITIAL_STATE = { title: "", description: "", body: "" }
+    const INITIAL_STATE = { title: "", description: "", body: "", comments: [] }
     const history = useHistory();
     const [formData, setFormData] = useState(post.id ? post : INITIAL_STATE);
     const { blogs, setBlogs } = useContext(BlogContext)
@@ -20,7 +21,7 @@ function NewPost({ post = {} }) {
         evt.preventDefault();
         //if editting a pre-existing blog need to make sure that it is saved over it's previous self
         if(!post.id){
-            {!blogs ? setBlogs([{ ...formData, id: 1 }]) : setBlogs([...blogs, { ...formData, id: (blogs.length + 1) }])}
+            {!blogs ? setBlogs([{ ...formData, id: uuid() }]) : setBlogs([...blogs, { ...formData, id: uuid() }])}
         } else {
             setBlogs(blogs.map(blog => blog.id === post.id ? {...formData, id: blog.id} : blog))
         }
