@@ -30,10 +30,17 @@ function Post() {
         history.push("/")
     }
 
+    //save changes to a blog post
     const editBlog = (edittedPost) => {
         dispatch(editPost(edittedPost));
         toggleEditView();
     } 
+
+    //delete a particular comment
+    const deleteComment = (evt) => {
+        evt.preventDefault();
+        dispatch(deleteComment(currentPost.id, evt.target.id))
+    }
 
     // const [post, setPost] = useState(null)
     // const { blogs, setBlogs } = useContext(BlogContext)
@@ -68,8 +75,6 @@ function Post() {
     //     //kind of hacky way to remove the button but it works
     //     evt.target.parentNode.remove();
     // }
-
-    const deleteComment = () => {}
     return (
         <div>
             {!editView ? (<>
