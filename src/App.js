@@ -25,7 +25,7 @@ function App() {
             <NewPost />
           </Route>
           <Route exact path="/">
-            <Blog />
+            <Home />
           </Route>
         </div>
       </BlogContext.Provider>
