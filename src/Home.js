@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import BlogContext from './BlogContext'
 import TitleList from './TitleList'
 
-function Blog() {
+function Home() {
     const { blogs } = useContext(BlogContext)
 
     return (
@@ -13,4 +13,4 @@ function Blog() {
     )
 }
 
-export default Blog;
+export default Home;

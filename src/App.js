@@ -4,7 +4,7 @@ import Header from './Header'
 import NewPost from './NewPost'
 import Post from './Post'
 import { Route, BrowserRouter } from 'react-router-dom'
-import Blog from './Blog'
+import Home from './Home'
 import BlogContext from './BlogContext'
 import useLocalStorage from './hooks'
 
