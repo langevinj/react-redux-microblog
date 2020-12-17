@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import './App.css';
 import Header from './Header'
 import NewPost from './NewPost'
@@ -11,13 +11,8 @@ import useLocalStorage from './hooks'
 function App() {
   // const [blogsLoaded, setBlogsLoaded] = useState(false)
   const [blogs, setBlogs] = useLocalStorage("blogs");
-  // useEffect(() => {
-  //   function loadBlogs() {
-  //     try {
+  //sort out the blog to be deleted and remove from blogs
 
-  //     }
-  //   }
-  // })
   console.log(blogs)
   return (
     <BrowserRouter>
