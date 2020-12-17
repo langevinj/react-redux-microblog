@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import { removePost, editPost, addComment, deleteComment} from './actions'
 import CommentForm from './CommentForm'
+import CommentList from './CommentList'
 import PostDisplay from './PostDisplay'
 import PostForm from './PostForm'
 import { useSelector, useDispatch } from 'react-redux'
@@ -74,10 +75,7 @@ function Post() {
             {!editView ? (<>
                 <PostDisplay post={currentPost} toggleEditView={toggleEditView} deleteBlog={deleteBlog}/>
                 <h3 className="border-top">Comments:</h3>
-                {currentPost.comments ? currentPost.comments.map(comment => <div key={comment.id} id={currentPost.id}><button className="btn fas fa-times text-danger" onClick={deleteComment} id={comment.id}></button><p>{comment.text}</p></div>) : <p className="text-secondary font-italic">No comments on this post yet</p>}</>) : <PostForm post={currentPost} editBlog={editBlog}/>}
-                {/* {post.id ? <CommentForm post={post} /> : null}
-            </>) : <NewPost post={post}/>} */}
-        
+                <CommentList comments={currentPost.comments} deleteComment={deleteComment} /></>) : <PostForm post={currentPost} editBlog={editBlog}/>}
         </div>
     )
 }
