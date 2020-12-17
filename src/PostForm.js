@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { v4 as uuid } from 'uuid'
 import { useHistory } from 'react-router-dom'
 
-function PostForm({ addNewPost }) {
+function PostForm({ addNewPost = () => {}, post = null, editBlog = () => {} }) {
     const INITIAL_STATE = { title: "", description: "", body: "", comments: [] }
-    const [formData, setFormData] = useState(INITIAL_STATE);
+    const [formData, setFormData] = useState(post ? post : INITIAL_STATE);
     const history = useHistory();
 
     const handleChange = (evt) => {
@@ -17,15 +17,7 @@ function PostForm({ addNewPost }) {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        addNewPost({...formData, id: uuid()});
-        //if editting a pre-existing blog need to make sure that it is saved over it's previous self
-        // if (!post.id) {
-        //     { !blogs ? setBlogs([{ ...formData, id: uuid() }]) : setBlogs([...blogs, { ...formData, id: uuid() }]) }
-        // } else {
-        //     setBlogs(blogs.map(blog => blog.id === post.id ? { ...formData, id: blog.id } : blog))
-        // }
-
-        // setBlogs([...blogs, {...formData, id: (blogs.length + 1)}])
+        post ? editBlog(formData) : addNewPost({ ...formData, id: uuid() });
         setFormData(INITIAL_STATE);
     }
 

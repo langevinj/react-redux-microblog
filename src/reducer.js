@@ -10,6 +10,7 @@ function reducer(state = INITIAL_STATE, action) {
             return { posts: {...state.posts, [action.payload.id]: {...action.payload}}}
 
         case EDIT:
+            return { posts: {...state.posts, [action.payload.id]: {...action.payload}}}
 
         case REMOVE:
             if(state.posts[action.payload]){
