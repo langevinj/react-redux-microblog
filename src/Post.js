@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import BlogContext from './BlogContext' 
 import NewPost from './NewPost'
+import CommentForm from './CommentForm'
 
 function Post() {
     const { id } = useParams();
@@ -44,6 +45,9 @@ function Post() {
                 </div>
                 <p className="font-italic">{post.description}</p>
                 <p>{post.body}</p>
+                <h3 className="border-top">Comments:</h3>
+                {post.comments ? post.comments.map((comment, idx) => <div key={idx}><button className="btn"><i className="fas fa-times text-danger"></i></button><p>{comment}</p></div>) : <p className="text-secondary font-italic">No comments on this post yet</p>}
+                {post.id ? <CommentForm post={post} /> : null}
             </>) : <NewPost post={post}/>}
         </div>
     )
