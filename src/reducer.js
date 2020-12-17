@@ -7,8 +7,7 @@ function reducer(state = INITIAL_STATE, action) {
 
     switch(action.type) {
         case ADD:
-            console.log(action.payload)
-            return { ...state.posts, [action.payload.id]: {...action.payload}}
+            return { posts: {...state.posts, [action.payload.id]: {...action.payload}}}
 
         case EDIT:
 
