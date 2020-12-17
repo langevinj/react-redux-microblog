@@ -1,12 +1,12 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
-import BlogContext from './BlogContext' 
-import NewPost from './NewPost'
+import { removePost, editPost, addComment, deleteComment} from './actions'
 import CommentForm from './CommentForm'
 import PostDisplay from './PostDisplay'
 import { useSelector, useDispatch } from 'react-redux'
 
 function Post() {
+    const dispatch = useDispatch();
     const { id } = useParams();
     const posts = useSelector(st => st.posts)
     //set the current post to the post from the id
@@ -16,8 +16,16 @@ function Post() {
 
     if (!currentPost) { return <h1>404 oops this blog post wasn't found!</h1> }
 
+    //toggle the editting view of a post
     const toggleEditView = (evt) => {
         setEditView(!editView)
+    }
+
+    //delete a blog post by id
+    const deleteBlog = (evt) => {
+        evt.preventDefault();
+        dispatch(removePost(evt.target.parentNode.id))
+        history.push("/")
     }
 
     // const [post, setPost] = useState(null)
@@ -55,7 +63,6 @@ function Post() {
     // }
 
     const deleteComment = () => {}
-    const deleteBlog = () => {}
     return (
         <div>
             {!editView ? (<>

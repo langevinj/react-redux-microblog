@@ -12,7 +12,12 @@ function reducer(state = INITIAL_STATE, action) {
         case EDIT:
 
         case REMOVE:
-
+            if(state.posts[action.payload]){
+                let { [action.payload]: omit, ...updatedPosts } = state.posts
+                return { ...state, posts: { ...updatedPosts} } 
+            } 
+        return null
+        
         case ADDCOMMENT:
 
         case DELETECOMMENT:
