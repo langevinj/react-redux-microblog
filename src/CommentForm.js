@@ -11,6 +11,7 @@ function CommentForm({ addComment = () => {} }){
     const handleSubmit = (evt) => {
         evt.preventDefault();
         addComment(newComment);
+        setNewComment("");
     }
 
     return (
