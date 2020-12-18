@@ -1,7 +1,6 @@
 import React  from 'react'
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { addPost } from './actions'
 import PostForm from './PostForm'
 import {addPostToApi} from './actionCreators'
 

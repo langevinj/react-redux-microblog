@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import './App.css';
 import Header from './Header'
 import NewPost from './NewPost'
@@ -6,9 +6,9 @@ import Post from './Post'
 import { Route, BrowserRouter } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Home from './Home'
-import { useLocalStorage } from './hooks'
-import { loadLocalStorage } from './actions';
-import { fetchPostsFromApi } from './actionCreators';
+// import { useLocalStorage } from './hooks'
+// import { loadLocalStorage } from './actions';
+// import { fetchPostsFromApi } from './actionCreators';
 
 function App() {
   // const [blogsLoaded, setBlogsLoaded] = useState(false)
