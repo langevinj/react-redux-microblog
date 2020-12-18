@@ -1,6 +1,6 @@
 import { ADD, EDIT, REMOVE, ADDCOMMENT, DELETECOMMENT, LOCALLOAD} from './actionTypes'
 
-const INITIAL_STATE = { posts: {}, error: false }
+const INITIAL_STATE = { posts: {}, titles: [], error: false }
 
 function reducer(state = INITIAL_STATE, action) {
     // console.log("reducer ran; state & action:", state, action); 
@@ -29,7 +29,7 @@ function reducer(state = INITIAL_STATE, action) {
             return { ...state, posts: action.payload}
 
         case 'FETCH_POSTS':
-            return { ...state, posts: action.posts}
+            return { ...state, titles: action.titles}
             
         case 'FETCH_INFO':
             return { ...state, posts: action.post }

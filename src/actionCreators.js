@@ -2,10 +2,10 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:5000/api'
 
-function fetchPosts(posts) {
+function fetchPosts(titles) {
     return {
         type: 'FETCH_POSTS',
-        posts
+        titles
     };
 }
 
