@@ -1,1 +1,1 @@
-An mock blogging website React app to practice Redux and using thunk for async calls.
+An mock blogging website - React app to practice Redux and using thunk for async calls.
