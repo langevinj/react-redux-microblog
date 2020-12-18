@@ -12,20 +12,15 @@ import { useSelector, useDispatch } from 'react-redux'
 function Post() {
     const dispatch = useDispatch();
     const { id } = useParams();
+    const post = useSelector(st => st.posts);
 
+    //get the info on the post from the API
     useEffect(() => {
         dispatch(fetchPostInfoFromApi(id));
     }, [dispatch])
 
-
-    const posts = useSelector(st => st.posts)
-    
     const [editView, setEditView] = useState(false)
     const history = useHistory()
-
-    
-
-    const currentPost = posts ? posts[id] : null
 
     //toggle the editting view of a post
     const toggleEditView = () => {
@@ -58,10 +53,10 @@ function Post() {
 
     return (
         <div>
-            {currentPost ? !editView ? (<>
-                <PostDisplay postid={id} toggleEditView={toggleEditView} deleteBlog={deleteBlog}/>
+            {post ? !editView ? (<>
+                <PostDisplay post={post} toggleEditView={toggleEditView} deleteBlog={deleteBlog}/>
                 <h3 className="border-top">Comments:</h3>
-                <CommentList deleteComment={deleteTargetComment} /><CommentForm addComment={addNewComment} /></>) : <PostForm post={currentPost} editBlog={editBlog}/> : <></>}
+                <CommentList comments={post.comments} deleteComment={deleteTargetComment} /><CommentForm addComment={addNewComment} /></>) : <PostForm post={post} editBlog={editBlog}/> : <></>}
         </div>
     )
 }
