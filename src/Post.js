@@ -6,7 +6,7 @@ import CommentForm from './CommentForm'
 import CommentList from './CommentList'
 import PostDisplay from './PostDisplay'
 import PostForm from './PostForm'
-import { fetchPostInfoFromApi, removePostFromApi, editPostInApi, fetchCommentsForPost } from './actionCreators'
+import { fetchPostInfoFromApi, removePostFromApi, editPostInApi, fetchCommentsForPost, addCommentInApi } from './actionCreators'
 import { useSelector, useDispatch } from 'react-redux'
 
 function Post() {
@@ -54,7 +54,8 @@ function Post() {
 
     //add a comment to a post
     const addNewComment = (comment) => {
-        dispatch(addComment(id, {text: comment, id: uuid() }))
+        // dispatch(addComment(id, {text: comment, id: uuid() }))
+        dispatch(addCommentInApi(post.id, comment))
     }
 
     return (

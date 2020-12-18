@@ -16,7 +16,8 @@ function reducer(state = INITIAL_STATE, action) {
             return action.message
         
         case ADDCOMMENT:
-            return { ...state, posts: { ...state.posts, [action.payload.postid]: {...state.posts[action.payload.postid], comments: [...state.posts[action.payload.postid].comments, {...action.payload.comment}]}}}
+            return { ...state, posts: {...state.posts, comments: [...state.posts.comments, action.comment]}}
+            // return { ...state, posts: { ...state.posts, [action.payload.postid]: {...state.posts[action.payload.postid], comments: [...state.posts[action.payload.postid].comments, {...action.payload.comment}]}}}
 
         case DELETECOMMENT:
             return { ...state, posts: {...state.posts, [action.payload.postid]: {...state.posts[action.payload.postid], comments: state.posts[action.payload.postid].comments.filter(c => c.id !== action.payload.commentid)}}}

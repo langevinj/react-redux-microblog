@@ -38,10 +38,17 @@ function fetchPostInfo(post) {
     };
 }
 
-function fetchPostComments(comments, id) {
+function fetchPostComments(comments) {
     return {
         type: FETCH_COMMENTS,
-        comments, id
+        comments
+    }
+}
+
+function addComment(comment) {
+    return {
+        type: ADDCOMMENT,
+        comment
     }
 }
 
@@ -111,17 +118,21 @@ export function fetchCommentsForPost(id) {
     return async function thunk(dispatch) {
         try {
             let comments = await axios.get(`${API_URL}/posts/${id}/comments`);
-            dispatch(fetchPostComments(comments.data, id));
+            dispatch(fetchPostComments(comments.data));
         } catch (error) {
             dispatch(handleError(error.response.data)); 
         }
     }
 }
-// export function addCommentInApi(id, text) {
-//     return async function thunk (dispatch) {
-//         try {
-//             let comment = 
-//         }
-//     }
-// }
+
+export function addCommentInApi(id, text) {
+    return async function thunk (dispatch) {
+        try {
+            let comment = await axios.post(`${API_URL}/posts/${id}/comments`, { text: text })
+            dispatch(addComment(comment.data))
+        } catch (error) {
+            dispatch(handleError(error.response.data)); 
+        }
+    }
+}
 
