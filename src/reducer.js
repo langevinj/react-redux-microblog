@@ -13,11 +13,12 @@ function reducer(state = INITIAL_STATE, action) {
             return { ...state, posts: {...state.posts, [action.payload.id]: {...action.payload}}}
 
         case REMOVE:
-            if(state.posts[action.payload]){
-                let { [action.payload]: omit, ...updatedPosts } = state.posts
-                return { ...state, posts: { ...updatedPosts} } 
-            } 
-        return null
+            return action.message
+        //     if(state.posts[action.payload]){
+        //         let { [action.payload]: omit, ...updatedPosts } = state.posts
+        //         return { ...state, posts: { ...updatedPosts} } 
+        //     } 
+        // return null
         
         case ADDCOMMENT:
             return { ...state, posts: { ...state.posts, [action.payload.postid]: {...state.posts[action.payload.postid], comments: [...state.posts[action.payload.postid].comments, {...action.payload.comment}]}}}

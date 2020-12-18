@@ -2,6 +2,13 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:5000/api'
 
+function removePost(message) {
+    return {
+        type: 'REMOVE',
+        message
+    };
+}
+
 function fetchPosts(titles) {
     return {
         type: 'FETCH_POSTS',
@@ -39,6 +46,17 @@ export function fetchPostInfoFromApi(id) {
         try {
             let post = await axios.get(`${API_URL}/posts/${id}`);
             dispatch(fetchPostInfo(post.data));
+        } catch (error) {
+            dispatch(handleError(error.response.data));
+        }
+    }
+}
+
+export function removePostFromApi(id) {
+    return async function thunk(dispatch) {
+        try {
+            let res = await axios.delete(`${API_URL}/posts/${id}`);
+            dispatch(removePost(res.message));
         } catch (error) {
             dispatch(handleError(error.response.data));
         }

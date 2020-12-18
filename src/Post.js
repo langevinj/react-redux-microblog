@@ -6,13 +6,14 @@ import CommentForm from './CommentForm'
 import CommentList from './CommentList'
 import PostDisplay from './PostDisplay'
 import PostForm from './PostForm'
-import { fetchPostInfoFromApi } from './actionCreators'
+import { fetchPostInfoFromApi, removePostFromApi } from './actionCreators'
 import { useSelector, useDispatch } from 'react-redux'
 
 function Post() {
     const dispatch = useDispatch();
     const { id } = useParams();
     const post = useSelector(st => st.posts);
+    const titles = useSelector(st => st.titles)
 
     //get the info on the post from the API
     useEffect(() => {
@@ -30,7 +31,8 @@ function Post() {
     //delete a blog post by id
     const deleteBlog = (evt) => {
         evt.preventDefault();
-        dispatch(removePost(evt.target.parentNode.id))
+        // dispatch(removePost(evt.target.parentNode.id))
+        dispatch(removePostFromApi(id));
         history.push("/")
     }
 

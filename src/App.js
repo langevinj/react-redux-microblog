@@ -14,12 +14,7 @@ function App() {
   // const [blogsLoaded, setBlogsLoaded] = useState(false)
   const posts = useSelector(st => st.posts)
   const error = useSelector(st => st.error);
-  const [storedPosts, setStoredPosts] = useLocalStorage("posts");
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchPostsFromApi());
-  }, [dispatch])
+  // const [storedPosts, setStoredPosts] = useLocalStorage("posts");
   
   //sort out the blog to be deleted and remove from blogs
   //
@@ -28,12 +23,12 @@ function App() {
   //   dispatch(loadLocalStorage(storedPosts))
   // }, [])
 
-  useEffect(() => {
-    function updateLocalPosts() {
-      setStoredPosts(storedPosts => posts)
-    }
-    updateLocalPosts()
-  }, [posts])
+  // useEffect(() => {
+  //   function updateLocalPosts() {
+  //     setStoredPosts(storedPosts => posts)
+  //   }
+  //   updateLocalPosts()
+  // }, [posts])
 
   if (error) {
     return <h3>Something is wrong...</h3>
