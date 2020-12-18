@@ -1,45 +1,46 @@
 import axios from 'axios';
+import { ADD, EDIT, REMOVE, ADDCOMMENT, DELETECOMMENT, FETCH_INFO, FETCH_POSTS, ERROR } from './actionTypes'
 
 const API_URL = 'http://localhost:5000/api'
 
 function addPost(post) {
     return {
-        type: 'ADD',
+        type: ADD,
         post
     };
 }
 
 function editPost(post) {
     return {
-        type: 'EDIT',
+        type: EDIT,
         post
     };
 }
 
 function removePost(message) {
     return {
-        type: 'REMOVE',
+        type: REMOVE,
         message
     };
 }
 
 function fetchPosts(titles) {
     return {
-        type: 'FETCH_POSTS',
+        type: FETCH_POSTS,
         titles
     };
 }
 
 function fetchPostInfo(post) {
     return { 
-        type: 'FETCH_INFO',
+        type: FETCH_INFO,
         post
     };
 }
 
 function handleError(error) {
     return {
-        type: 'ERROR',
+        type: ERROR,
         error
     };
 }
