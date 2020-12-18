@@ -10,7 +10,7 @@ function reducer(state = INITIAL_STATE, action) {
             return { ...state, posts: {...state.posts, [action.post.id]: {...action.post}}, titles: [...state.titles, {id: action.post.id, title: action.post.title, description: action.post.description}]}
 
         case EDIT:
-            return { ...state, posts: {...state.posts, [action.payload.id]: {...action.payload}}}
+            return { ...state, posts: { ...state.posts, [action.post.id]: { ...action.post } }, titles: state.titles.map(title => title.id === action.post.id ? { id: action.post.id, title: action.post.title, description: action.post.description } : title)}
 
         case REMOVE:
             return action.message

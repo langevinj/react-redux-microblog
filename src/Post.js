@@ -8,6 +8,7 @@ import PostDisplay from './PostDisplay'
 import PostForm from './PostForm'
 import { fetchPostInfoFromApi, removePostFromApi } from './actionCreators'
 import { useSelector, useDispatch } from 'react-redux'
+import { editPostInApi } from './actionCreators'
 
 function Post() {
     const dispatch = useDispatch();
@@ -37,7 +38,8 @@ function Post() {
 
     //save changes to a blog post
     const editBlog = (edittedPost) => {
-        dispatch(editPost(edittedPost));
+        // dispatch(editPost(edittedPost));
+        dispatch(editPostInApi(edittedPost))
         toggleEditView();
     } 
 

@@ -9,6 +9,13 @@ function addPost(post) {
     };
 }
 
+function editPost(post) {
+    return {
+        type: 'EDIT',
+        post
+    };
+}
+
 function removePost(message) {
     return {
         type: 'REMOVE',
@@ -41,8 +48,18 @@ export function addPostToApi(post) {
     return async function thunk(dispatch) {
         try {
             let res = await axios.post(`${API_URL}/posts/`, {title: post.title, description: post.description, body: post.body});
-            console.log(res.data)
             dispatch(addPost(res.data));
+        } catch (error) {
+            dispatch(handleError(error.response.data));
+        }
+    }
+}
+
+export function editPostInApi(post) {
+    return async function thunk(dispatch) {
+        try {
+            let res = await axios.put(`${API_URL}/posts/${post.id}`, { title: post.title, description: post.description, body: post.body });
+            dispatch(editPost(res.data))
         } catch (error) {
             dispatch(handleError(error.response.data));
         }
