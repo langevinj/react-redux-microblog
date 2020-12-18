@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
-import { addComment, deleteComment} from './actions'
-import {v4 as uuid} from 'uuid'
 import CommentForm from './CommentForm'
 import CommentList from './CommentList'
 import PostDisplay from './PostDisplay'
@@ -51,12 +49,10 @@ function Post() {
         evt.preventDefault();
         console.log(evt.target.id)
         dispatch(deleteCommentInApi(post.id, evt.target.id))
-        // dispatch(deleteComment(id, evt.target.id))
     }
 
     //add a comment to a post
     const addNewComment = (comment) => {
-        // dispatch(addComment(id, {text: comment, id: uuid() }))
         dispatch(addCommentInApi(post.id, comment))
     }
 
