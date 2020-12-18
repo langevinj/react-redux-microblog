@@ -15,13 +15,14 @@ function Post() {
     const { id } = useParams();
     const post = useSelector(st => st.posts);
     const titles = useSelector(st => st.titles)
+    const [editView, setEditView] = useState(false)
 
     //get the info on the post from the API
     useEffect(() => {
         dispatch(fetchPostInfoFromApi(id));
-    }, [dispatch])
+    }, [dispatch, editView])
 
-    const [editView, setEditView] = useState(false)
+    
     const history = useHistory()
 
     //toggle the editting view of a post
@@ -38,7 +39,6 @@ function Post() {
 
     //save changes to a blog post
     const editBlog = (edittedPost) => {
-        // dispatch(editPost(edittedPost));
         dispatch(editPostInApi(edittedPost))
         toggleEditView();
     } 
