@@ -31,7 +31,6 @@ function Post() {
     //delete a blog post by id
     const deleteBlog = (evt) => {
         evt.preventDefault();
-        // dispatch(removePost(evt.target.parentNode.id))
         dispatch(removePostFromApi(id));
         history.push("/")
     }

@@ -3,13 +3,14 @@ import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { addPost } from './actions'
 import PostForm from './PostForm'
+import {addPostToApi} from './actionCreators'
 
 function NewPost({ post = {} }) {
     const history = useHistory();
     const dispatch = useDispatch();
 
     const addNewPost = (post) => {
-        dispatch(addPost(post))
+        dispatch(addPostToApi(post))
         history.push("/");
     }
 

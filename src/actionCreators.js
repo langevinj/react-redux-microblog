@@ -2,6 +2,13 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:5000/api'
 
+function addPost(post) {
+    return {
+        type: 'ADD',
+        post
+    };
+}
+
 function removePost(message) {
     return {
         type: 'REMOVE',
@@ -28,6 +35,18 @@ function handleError(error) {
         type: 'ERROR',
         error
     };
+}
+
+export function addPostToApi(post) {
+    return async function thunk(dispatch) {
+        try {
+            let res = await axios.post(`${API_URL}/posts/`, {title: post.title, description: post.description, body: post.body});
+            console.log(res.data)
+            dispatch(addPost(res.data));
+        } catch (error) {
+            dispatch(handleError(error.response.data));
+        }
+    }
 }
 
 export function fetchPostsFromApi() {

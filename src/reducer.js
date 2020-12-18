@@ -7,18 +7,13 @@ function reducer(state = INITIAL_STATE, action) {
 
     switch(action.type) {
         case ADD:
-            return { ...state, posts: {...state.posts, [action.payload.id]: {...action.payload}}}
+            return { ...state, posts: {...state.posts, [action.post.id]: {...action.post}}, titles: [...state.titles, {id: action.post.id, title: action.post.title, description: action.post.description}]}
 
         case EDIT:
             return { ...state, posts: {...state.posts, [action.payload.id]: {...action.payload}}}
 
         case REMOVE:
             return action.message
-        //     if(state.posts[action.payload]){
-        //         let { [action.payload]: omit, ...updatedPosts } = state.posts
-        //         return { ...state, posts: { ...updatedPosts} } 
-        //     } 
-        // return null
         
         case ADDCOMMENT:
             return { ...state, posts: { ...state.posts, [action.payload.postid]: {...state.posts[action.payload.postid], comments: [...state.posts[action.payload.postid].comments, {...action.payload.comment}]}}}
