@@ -4,10 +4,11 @@ import { useDispatch } from 'react-redux'
 import PostForm from './PostForm'
 import {addPostToApi} from './actionCreators'
 
-function NewPost({ post = {} }) {
+function NewPost() {
     const history = useHistory();
     const dispatch = useDispatch();
 
+    /** Adds the post and saves it to the backend */
     const addNewPost = (post) => {
         dispatch(addPostToApi(post))
         history.push("/");

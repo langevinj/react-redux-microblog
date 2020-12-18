@@ -21,6 +21,7 @@ function PostForm({ addNewPost = () => {}, post = null, editBlog = () => {} }) {
         setFormData(INITIAL_STATE);
     }
 
+    /**Canceling adding a new post redirects to homepage */
     const handleCancel = (evt) => {
         evt.preventDefault();
         setFormData(INITIAL_STATE);

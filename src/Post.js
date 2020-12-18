@@ -7,6 +7,13 @@ import PostForm from './PostForm'
 import { fetchPostInfoFromApi, removePostFromApi, editPostInApi, fetchCommentsForPost, addCommentInApi, deleteCommentInApi, voteOnPostApi } from './actionCreators'
 import { useSelector, useDispatch } from 'react-redux'
 
+/**Gets post data from API, if present
+ * handles edit form
+ * handles adding a comment
+ * handles comment and post deletion
+ * handles votes
+ */
+
 function Post() {
     const dispatch = useDispatch();
     const { id } = useParams();
