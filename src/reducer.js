@@ -1,4 +1,4 @@
-import { ADD, EDIT, REMOVE, ADDCOMMENT, DELETECOMMENT, LOCALLOAD, FETCH_INFO, FETCH_POSTS, ERROR} from './actionTypes'
+import { ADD, EDIT, REMOVE, ADDCOMMENT, DELETECOMMENT, LOCALLOAD, FETCH_INFO, FETCH_POSTS, ERROR, FETCH_COMMENTS} from './actionTypes'
 
 const INITIAL_STATE = { posts: {}, titles: [], error: false }
 
@@ -29,6 +29,9 @@ function reducer(state = INITIAL_STATE, action) {
             
         case FETCH_INFO:
             return { ...state, posts: action.post }
+
+        case FETCH_COMMENTS: 
+            return { ...state, posts: {...state.posts, comments: [...action.comments]}}
         
         case ERROR:
             return { ...state, error: true }

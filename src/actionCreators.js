@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ADD, EDIT, REMOVE, ADDCOMMENT, DELETECOMMENT, FETCH_INFO, FETCH_POSTS, ERROR } from './actionTypes'
+import { ADD, EDIT, REMOVE, ADDCOMMENT, DELETECOMMENT, FETCH_INFO, FETCH_POSTS, ERROR, FETCH_COMMENTS } from './actionTypes'
 
 const API_URL = 'http://localhost:5000/api'
 
@@ -38,6 +38,13 @@ function fetchPostInfo(post) {
     };
 }
 
+function fetchPostComments(comments, id) {
+    return {
+        type: FETCH_COMMENTS,
+        comments, id
+    }
+}
+
 function handleError(error) {
     return {
         type: ERROR,
@@ -67,6 +74,17 @@ export function editPostInApi(post) {
     }
 }
 
+export function removePostFromApi(id) {
+    return async function thunk(dispatch) {
+        try {
+            let res = await axios.delete(`${API_URL}/posts/${id}`);
+            dispatch(removePost(res.message));
+        } catch (error) {
+            dispatch(handleError(error.response.data));
+        }
+    }
+}
+
 export function fetchPostsFromApi() {
     return async function thunk(dispatch) {
         try {
@@ -89,13 +107,21 @@ export function fetchPostInfoFromApi(id) {
     }
 }
 
-export function removePostFromApi(id) {
+export function fetchCommentsForPost(id) {
     return async function thunk(dispatch) {
         try {
-            let res = await axios.delete(`${API_URL}/posts/${id}`);
-            dispatch(removePost(res.message));
+            let comments = await axios.get(`${API_URL}/posts/${id}/comments`);
+            dispatch(fetchPostComments(comments.data, id));
         } catch (error) {
-            dispatch(handleError(error.response.data));
+            dispatch(handleError(error.response.data)); 
         }
     }
 }
+// export function addCommentInApi(id, text) {
+//     return async function thunk (dispatch) {
+//         try {
+//             let comment = 
+//         }
+//     }
+// }
+

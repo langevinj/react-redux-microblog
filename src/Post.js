@@ -6,13 +6,14 @@ import CommentForm from './CommentForm'
 import CommentList from './CommentList'
 import PostDisplay from './PostDisplay'
 import PostForm from './PostForm'
-import { fetchPostInfoFromApi, removePostFromApi, editPostInApi } from './actionCreators'
+import { fetchPostInfoFromApi, removePostFromApi, editPostInApi, fetchCommentsForPost } from './actionCreators'
 import { useSelector, useDispatch } from 'react-redux'
 
 function Post() {
     const dispatch = useDispatch();
     const { id } = useParams();
     const post = useSelector(st => st.posts);
+    const comments = useSelector(st => st.posts.comments)
     const titles = useSelector(st => st.titles)
     const [editView, setEditView] = useState(false)
 
@@ -21,7 +22,10 @@ function Post() {
         dispatch(fetchPostInfoFromApi(id));
     }, [dispatch, editView])
 
-    
+    useEffect(() => {
+        dispatch(fetchCommentsForPost(id));
+    }, [dispatch])
+
     const history = useHistory()
 
     //toggle the editting view of a post
@@ -58,7 +62,7 @@ function Post() {
             {post ? !editView ? (<>
                 <PostDisplay post={post} toggleEditView={toggleEditView} deleteBlog={deleteBlog}/>
                 <h3 className="border-top">Comments:</h3>
-                <CommentList comments={post.comments} deleteComment={deleteTargetComment} /><CommentForm addComment={addNewComment} /></>) : <PostForm post={post} editBlog={editBlog}/> : <></>}
+                <CommentList comments={comments} deleteComment={deleteTargetComment} /><CommentForm addComment={addNewComment} /></>) : <PostForm post={post} editBlog={editBlog}/> : <></>}
         </div>
     )
 }
