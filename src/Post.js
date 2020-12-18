@@ -12,15 +12,18 @@ import { useSelector, useDispatch } from 'react-redux'
 function Post() {
     const dispatch = useDispatch();
     const { id } = useParams();
+
+    useEffect(() => {
+        dispatch(fetchPostInfoFromApi(id));
+    }, [dispatch])
+
+
     const posts = useSelector(st => st.posts)
-    //set the current post to the post from the id
     
     const [editView, setEditView] = useState(false)
     const history = useHistory()
 
-    // useEffect(() => {
-    //     dispatch(fetchPostInfoFromApi(id));
-    // }, [dispatch])
+    
 
     const currentPost = posts ? posts[id] : null
 
