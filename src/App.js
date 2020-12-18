@@ -17,9 +17,9 @@ function App() {
   const [storedPosts, setStoredPosts] = useLocalStorage("posts");
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchPostsFromApi());
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(fetchPostsFromApi());
+  // }, [dispatch])
   
   //sort out the blog to be deleted and remove from blogs
   //

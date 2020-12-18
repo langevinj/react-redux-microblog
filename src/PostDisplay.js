@@ -9,7 +9,7 @@ function PostDisplay({ post = null, toggleEditView = () => {}, deleteBlog = () =
                 <button className="btn fas fa-times text-danger" onClick={deleteBlog}></button>
         </div>
             <p className="font-italic">{post.description}</p>
-            <p>{post.body}</p></>) : null}
+                <p>{post.body}</p></>) : <h1>404 oops this blog post wasn't found!</h1>}
         </>
     )
 }

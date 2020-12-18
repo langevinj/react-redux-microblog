@@ -3,7 +3,7 @@ import { ADD, EDIT, REMOVE, ADDCOMMENT, DELETECOMMENT, LOCALLOAD} from './action
 const INITIAL_STATE = { posts: {}, error: false }
 
 function reducer(state = INITIAL_STATE, action) {
-    console.log("reducer ran; state & action:", state, action); 
+    // console.log("reducer ran; state & action:", state, action); 
 
     switch(action.type) {
         case ADD:
@@ -30,6 +30,9 @@ function reducer(state = INITIAL_STATE, action) {
 
         case 'FETCH_POSTS':
             return { ...state, posts: action.posts}
+            
+        case 'FETCH_INFO':
+            return { ...state, posts: action.post }
         
         case 'ERROR':
             return { ...state, error: true }

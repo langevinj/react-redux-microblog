@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import { removePost, editPost, addComment, deleteComment} from './actions'
 import {v4 as uuid} from 'uuid'
@@ -6,6 +6,7 @@ import CommentForm from './CommentForm'
 import CommentList from './CommentList'
 import PostDisplay from './PostDisplay'
 import PostForm from './PostForm'
+import { fetchPostInfoFromApi } from './actionCreators'
 import { useSelector, useDispatch } from 'react-redux'
 
 function Post() {
@@ -13,11 +14,15 @@ function Post() {
     const { id } = useParams();
     const posts = useSelector(st => st.posts)
     //set the current post to the post from the id
-    const currentPost = posts ? posts[id] : null
+    
     const [editView, setEditView] = useState(false)
     const history = useHistory()
 
-    if (!currentPost) { return <h1>404 oops this blog post wasn't found!</h1> }
+    // useEffect(() => {
+    //     dispatch(fetchPostInfoFromApi(id));
+    // }, [dispatch])
+
+    const currentPost = posts ? posts[id] : null
 
     //toggle the editting view of a post
     const toggleEditView = () => {
@@ -40,53 +45,20 @@ function Post() {
     //delete a particular comment
     const deleteTargetComment = (evt) => {
         evt.preventDefault();
-        dispatch(deleteComment(currentPost.id, evt.target.id))
+        dispatch(deleteComment(id, evt.target.id))
     }
 
     //add a comment to a post
     const addNewComment = (comment) => {
-        dispatch(addComment(currentPost.id, {text: comment, id: uuid() }))
+        dispatch(addComment(id, {text: comment, id: uuid() }))
     }
 
-    // const [post, setPost] = useState(null)
-    // const { blogs, setBlogs } = useContext(BlogContext)
-    
-
-    // useEffect(() => {
-    //     function loadBlog(){
-    //         if(blogs){
-    //             let targetPost = blogs.filter(b => b.id === `${id}`)
-    //             setPost(targetPost[0])
-    //         }
-    //     }
-    //     loadBlog()
-    // }, [])
-    
-    
-
-    
-
-    // const deleteBlog = (evt) => {
-    //     evt.preventDefault();
-    //     if(blogs){
-    //         console.log(blogs)
-    //         setBlogs(blogs.filter(b => b.id !== `${evt.target.parentNode.id}`))
-    //     }
-    //     history.push("/")
-    // }
-
-    // const deleteComment = (evt) => {
-    //     evt.preventDefault();
-    //     setBlogs(post.comments.length > 0 ? blogs.map(blog => (blog.id !== `${evt.target.parentNode.id}` ? blog : { ...blog, comments: blog.comments.filter(c => c.id !== `${evt.target.id}`)})) : blogs)
-    //     //kind of hacky way to remove the button but it works
-    //     evt.target.parentNode.remove();
-    // }
     return (
         <div>
-            {!editView ? (<>
-                <PostDisplay post={currentPost} toggleEditView={toggleEditView} deleteBlog={deleteBlog}/>
+            {currentPost ? !editView ? (<>
+                <PostDisplay postid={id} toggleEditView={toggleEditView} deleteBlog={deleteBlog}/>
                 <h3 className="border-top">Comments:</h3>
-                <CommentList comments={currentPost.comments} deleteComment={deleteTargetComment} /><CommentForm addComment={addNewComment} /></>) : <PostForm post={currentPost} editBlog={editBlog}/>}
+                <CommentList deleteComment={deleteTargetComment} /><CommentForm addComment={addNewComment} /></>) : <PostForm post={currentPost} editBlog={editBlog}/> : <></>}
         </div>
     )
 }
