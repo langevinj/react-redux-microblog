@@ -7,6 +7,9 @@ import VotingButtons from './VotingButtons'
 
 function TitleList(){
     const titles = useSelector(st => st.titles);
+    const sortedTitles = titles.sort(function(a,b) {
+        return b.votes - a.votes
+    })
     // const votes = useSelector(st => st.titles.votes)
     const [voted, setVoted] = useState(true)
     const dispatch = useDispatch();
@@ -23,7 +26,7 @@ function TitleList(){
 
     return (
         <ul>
-            {titles ? titles.map(title => <li className="postCard container w-25 border rounded bg-white m-2 d-inline-block p-3" key={uuid()} id={title.id}><Link to={`/posts/${title.id}`}><p>{title.title}</p></Link><p>{title.description}</p><div><span className="vote-count font-weight-bold mr-2">votes: {title.votes ? title.votes : 0 }</span></div><VotingButtons id={title.id} handleVote={handleVote}/></li>) : null}
+            {titles ? sortedTitles.map(title => <li className="postCard container w-25 border rounded bg-white m-2 d-inline-block p-3" key={uuid()} id={title.id}><Link to={`/posts/${title.id}`}><p>{title.title}</p></Link><p>{title.description}</p><div><span className="vote-count font-weight-bold mr-2">votes: {title.votes ? title.votes : 0 }</span></div><VotingButtons id={title.id} handleVote={handleVote}/></li>) : null}
         </ul>
     )
 }
