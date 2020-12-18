@@ -6,7 +6,7 @@ import CommentForm from './CommentForm'
 import CommentList from './CommentList'
 import PostDisplay from './PostDisplay'
 import PostForm from './PostForm'
-import { fetchPostInfoFromApi, removePostFromApi, editPostInApi, fetchCommentsForPost, addCommentInApi } from './actionCreators'
+import { fetchPostInfoFromApi, removePostFromApi, editPostInApi, fetchCommentsForPost, addCommentInApi, deleteCommentInApi } from './actionCreators'
 import { useSelector, useDispatch } from 'react-redux'
 
 function Post() {
@@ -24,7 +24,7 @@ function Post() {
 
     useEffect(() => {
         dispatch(fetchCommentsForPost(id));
-    }, [dispatch])
+    }, [dispatch, comments])
 
     const history = useHistory()
 
@@ -49,7 +49,9 @@ function Post() {
     //delete a particular comment
     const deleteTargetComment = (evt) => {
         evt.preventDefault();
-        dispatch(deleteComment(id, evt.target.id))
+        console.log(evt.target.id)
+        dispatch(deleteCommentInApi(post.id, evt.target.id))
+        // dispatch(deleteComment(id, evt.target.id))
     }
 
     //add a comment to a post

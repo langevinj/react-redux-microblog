@@ -52,6 +52,13 @@ function addComment(comment) {
     }
 }
 
+function deleteComment(id) {
+    return {
+        type: DELETECOMMENT,
+        id
+    }
+}
+
 function handleError(error) {
     return {
         type: ERROR,
@@ -130,6 +137,17 @@ export function addCommentInApi(id, text) {
         try {
             let comment = await axios.post(`${API_URL}/posts/${id}/comments`, { text: text })
             dispatch(addComment(comment.data))
+        } catch (error) {
+            dispatch(handleError(error.response.data)); 
+        }
+    }
+}
+
+export function deleteCommentInApi(postid, id) {
+    return async function thunk (dispatch) {
+        try {
+            let res = await axios.delete(`${API_URL}/posts/${postid}/comments/${id}`);
+            dispatch(deleteComment(id));
         } catch (error) {
             dispatch(handleError(error.response.data)); 
         }

@@ -17,10 +17,10 @@ function reducer(state = INITIAL_STATE, action) {
         
         case ADDCOMMENT:
             return { ...state, posts: {...state.posts, comments: [...state.posts.comments, action.comment]}}
-            // return { ...state, posts: { ...state.posts, [action.payload.postid]: {...state.posts[action.payload.postid], comments: [...state.posts[action.payload.postid].comments, {...action.payload.comment}]}}}
 
         case DELETECOMMENT:
-            return { ...state, posts: {...state.posts, [action.payload.postid]: {...state.posts[action.payload.postid], comments: state.posts[action.payload.postid].comments.filter(c => c.id !== action.payload.commentid)}}}
+            // return { ...state, posts: {...state.posts, [action.payload.postid]: {...state.posts[action.payload.postid], comments: state.posts[action.payload.postid].comments.filter(c => c.id !== action.payload.commentid)}}}
+            return { ...state, posts: { ...state.posts, coomments: state.posts.comments.filter(comment => comment.id !== action.id)}}
 
         case LOCALLOAD:
             return { ...state, posts: action.payload}
