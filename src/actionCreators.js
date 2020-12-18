@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ADD, EDIT, REMOVE, ADDCOMMENT, DELETECOMMENT, FETCH_INFO, FETCH_POSTS, ERROR, FETCH_COMMENTS } from './actionTypes'
+import { ADD, EDIT, REMOVE, ADDCOMMENT, DELETECOMMENT, FETCH_INFO, FETCH_POSTS, ERROR, FETCH_COMMENTS, VOTE } from './actionTypes'
 
 const API_URL = 'http://localhost:5000/api'
 
@@ -56,6 +56,13 @@ function deleteComment(id) {
     return {
         type: DELETECOMMENT,
         id
+    }
+}
+
+function voteOnPost(id, count) {
+    return {
+        type: VOTE,
+        id, count
     }
 }
 
@@ -150,6 +157,19 @@ export function deleteCommentInApi(postid, id) {
             dispatch(deleteComment(id));
         } catch (error) {
             dispatch(handleError(error.response.data)); 
+        }
+    }
+}
+
+export function voteOnPostApi(id, direction) {
+    return async function thunk (dispatch) {
+        try {
+            let res = await axios.post(`${API_URL}/posts/${id}/vote/${direction}`);
+            console.log(res)
+            dispatch(voteOnPost(id, res.data)); 
+        } catch (error) {
+            console.log("ERROR")
+            dispatch(handleError(error.response.data));
         }
     }
 }

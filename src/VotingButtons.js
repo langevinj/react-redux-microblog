@@ -1,12 +1,11 @@
-import React from 'react' 
+import React  from 'react' 
+import { voteOnPostApi } from './actionCreators'
 
-function VotingButtons({ count = 0 }) {
-
+function VotingButtons({ handleVote = () => {}, id = null}) {
     return (
-        <div className="voting-buttons">
-            <span className="vote-count font-weight-bold mr-2">votes: {count}</span>
-            <button className="far fa-thumbs-up btn btn-success mr-3"></button>
-            <button className="far fa-thumbs-down btn btn-danger"></button>
+        <div className="voting-buttons" id={id}>
+            <button className="far fa-thumbs-up btn btn-success mr-3" id="up" onClick={handleVote}></button>
+            <button className="far fa-thumbs-down btn btn-danger" id="down" onClick={handleVote}></button>
         </div>
     )
 }

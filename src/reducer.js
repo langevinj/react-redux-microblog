@@ -1,4 +1,4 @@
-import { ADD, EDIT, REMOVE, ADDCOMMENT, DELETECOMMENT, LOCALLOAD, FETCH_INFO, FETCH_POSTS, ERROR, FETCH_COMMENTS} from './actionTypes'
+import { ADD, EDIT, REMOVE, ADDCOMMENT, DELETECOMMENT, LOCALLOAD, FETCH_INFO, FETCH_POSTS, ERROR, FETCH_COMMENTS, VOTE} from './actionTypes'
 
 const INITIAL_STATE = { posts: {}, titles: [], error: false }
 
@@ -33,6 +33,9 @@ function reducer(state = INITIAL_STATE, action) {
 
         case FETCH_COMMENTS: 
             return { ...state, posts: {...state.posts, comments: [...action.comments]}}
+
+        case VOTE:
+            return { ...state, posts: { ...state.posts, [action.id]: {...state.posts[action.id], votes: action.count}}}
         
         case ERROR:
             return { ...state, error: true }

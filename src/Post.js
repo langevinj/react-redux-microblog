@@ -4,7 +4,7 @@ import CommentForm from './CommentForm'
 import CommentList from './CommentList'
 import PostDisplay from './PostDisplay'
 import PostForm from './PostForm'
-import { fetchPostInfoFromApi, removePostFromApi, editPostInApi, fetchCommentsForPost, addCommentInApi, deleteCommentInApi } from './actionCreators'
+import { fetchPostInfoFromApi, removePostFromApi, editPostInApi, fetchCommentsForPost, addCommentInApi, deleteCommentInApi, voteOnPostApi } from './actionCreators'
 import { useSelector, useDispatch } from 'react-redux'
 
 function Post() {
@@ -14,15 +14,16 @@ function Post() {
     const comments = useSelector(st => st.posts.comments)
     const titles = useSelector(st => st.titles)
     const [editView, setEditView] = useState(false)
+    const [toggler, setToggler] = useState(true)
 
     //get the info on the post from the API
     useEffect(() => {
         dispatch(fetchPostInfoFromApi(id));
-    }, [dispatch, editView])
+    }, [dispatch, editView, toggler])
 
     useEffect(() => {
         dispatch(fetchCommentsForPost(id));
-    }, [dispatch, comments])
+    }, [dispatch, toggler])
 
     const history = useHistory()
 
@@ -49,17 +50,25 @@ function Post() {
         evt.preventDefault();
         console.log(evt.target.id)
         dispatch(deleteCommentInApi(post.id, evt.target.id))
+        setToggler(!toggler)
     }
 
     //add a comment to a post
     const addNewComment = (comment) => {
         dispatch(addCommentInApi(post.id, comment))
+        setToggler(!toggler)
+    }
+
+    const handleVote = (evt) => {
+        evt.preventDefault();
+        dispatch(voteOnPostApi(evt.target.parentNode.id, evt.target.id));
+        setToggler(!toggler)
     }
 
     return (
         <div>
             {post ? !editView ? (<>
-                <PostDisplay post={post} toggleEditView={toggleEditView} deleteBlog={deleteBlog}/>
+                <PostDisplay post={post} toggleEditView={toggleEditView} deleteBlog={deleteBlog} handleVote={handleVote}/>
                 <h3 className="border-top">Comments:</h3>
                 <CommentList comments={comments} deleteComment={deleteTargetComment} /><CommentForm addComment={addNewComment} /></>) : <PostForm post={post} editBlog={editBlog}/> : <></>}
         </div>
