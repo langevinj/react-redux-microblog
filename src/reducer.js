@@ -19,7 +19,6 @@ function reducer(state = INITIAL_STATE, action) {
             return { ...state, posts: {...state.posts, comments: [...state.posts.comments, action.comment]}}
 
         case DELETECOMMENT:
-            // return { ...state, posts: {...state.posts, [action.payload.postid]: {...state.posts[action.payload.postid], comments: state.posts[action.payload.postid].comments.filter(c => c.id !== action.payload.commentid)}}}
             return { ...state, posts: { ...state.posts, coomments: state.posts.comments.filter(comment => comment.id !== action.id)}}
 
         case LOCALLOAD:

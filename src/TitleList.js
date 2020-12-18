@@ -10,7 +10,7 @@ function TitleList(){
     const sortedTitles = titles.sort(function(a,b) {
         return b.votes - a.votes
     })
-    // const votes = useSelector(st => st.titles.votes)
+
     const [voted, setVoted] = useState(true)
     const dispatch = useDispatch();
 
